@@ -1,4 +1,7 @@
 .idea/
+!.idea/runConfigurations/flask_init_db.xml
+!.idea/runConfigurations/start_flask.xml
+
 venv/
 
 *.pyc
@@ -13,3 +16,5 @@ htmlcov/
 dist/
 build/
 *.egg-info/
+
+
