@@ -39,6 +39,18 @@ def init_db_command():
     init_db()
     click.echo('Initialized the database')
 
+@click.command('db-all-users')
+@with_appcontext
+def db_get_all_users():
+    """returns data of all registered users"""
+    db = get_db()
+    users = db.execute('SELECT * FROM user').fetchall()
+    for user in users:
+        new_tuple = ()
+        for k in user.keys():
+            if k != 'password':
+                new_tuple = new_tuple + (user[k],)
+        print(new_tuple)
 
 # register functions to the application instance
 def init_app(app):
@@ -46,3 +58,4 @@ def init_app(app):
     app.teardown_appcontext(close_db)
     # adds a new command that can be called with the flask command.
     app.cli.add_command(init_db_command)
+    app.cli.add_command(db_get_all_users)
